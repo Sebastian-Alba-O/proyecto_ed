@@ -1,0 +1,20 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "barrio": "Centro", "precio": 2200000, "estrato": 4 },
+      "geometry": { "type": "Polygon", "coordinates": [ [ [-73.357,5.538], [-73.352,5.538], [-73.352,5.534], [-73.357,5.534], [-73.357,5.538] ] ] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "barrio": "Esmeralda", "precio": 1800000, "estrato": 3 },
+      "geometry": { "type": "Polygon", "coordinates": [ [ [-73.366,5.542], [-73.361,5.542], [-73.361,5.538], [-73.366,5.538], [-73.366,5.542] ] ] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "barrio": "Nueva Tunja", "precio": 1200000, "estrato": 2 },
+      "geometry": { "type": "Polygon", "coordinates": [ [ [-73.348,5.531], [-73.343,5.531], [-73.343,5.527], [-73.348,5.527], [-73.348,5.531] ] ] }
+    }
+  ]
+}

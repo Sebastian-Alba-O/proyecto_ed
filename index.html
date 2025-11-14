@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Proyecto ED - Zonas viables Tunja</title>
+		<!-- Leaflet CSS (CDN) -->
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+		<link rel="stylesheet" href="src/style.css" />
+	</head>
+	<body>
+		<div id="app">
+			<aside id="sidebar">
+				<h1>Zonas viables - Tunja</h1>
+				<div class="controls">
+					<label>Precio L(x) máximo:
+						<input id="priceMax" type="number" value="3000000" />
+					</label>
+					<label>Estrato mínimo:
+						<input id="estratoMin" type="number" value="1" min="1" max="6" />
+					</label>
+					<label>Beneficio mínimo:
+						<input id="benefMin" type="number" value="0" />
+					</label>
+							<button id="applyFilters">Aplicar filtros</button>
+
+							<hr />
+							<label> cargar GeoJSON local:
+								<input id="fileInput" type="file" accept="application/geo+json,application/json,.geojson" />
+							</label>
+										<div id="messages" aria-live="polite" style="margin-top:8px"></div>
+							<div style="margin-top:8px"><strong>Parámetros fórmula</strong></div>
+							<label>Cc (Costo construcción):
+								<input id="paramCc" type="number" value="200000" />
+							</label>
+							<label>A (Área lote m²):
+								<input id="paramA" type="number" value="150" />
+							</label>
+							<label>d (Densidad lotes por km²):
+								<input id="paramD" type="number" value="20" />
+							</label>
+							<label>m (Margen):
+								<input id="paramM" type="number" step="0.01" value="0.15" />
+							</label>
+				</div>
+
+				<section>
+					<h2>Resultados</h2>
+							<ul id="results"></ul>
+							<div id="metrics" style="margin-top:12px">
+								<h3>Métricas</h3>
+											<table id="metricsTable">
+												<thead><tr><th>Barrio</th><th>Beneficio (simple)</th><th>Beneficio (área, COP)</th></tr></thead>
+									<tbody></tbody>
+								</table>
+											<div style="margin-top:8px"><strong>R_total (beneficio acumulado):</strong> <span id="Rtotal">0</span></div>
+														<div style="margin-top:10px">
+															<h4>Sensibilidad (m)</h4>
+															<label>m range: <input id="mMin" type="number" step="0.01" value="0.01" style="width:80px"/> to <input id="mMax" type="number" step="0.01" value="0.5" style="width:80px"/></label>
+															<button id="simulateBtn">Simular sensibilidad</button>
+															<canvas id="sensChart" style="width:100%;height:200px;margin-top:8px"></canvas>
+														</div>
+																		<hr />
+																		<div style="margin-top:10px">
+																			<h4>Simulación temporal (ODE)</h4>
+																			<label>alpha (crecimiento relativo): <input id="odeAlpha" type="number" step="0.001" value="0.0" style="width:100px"/></label>
+																			<label>gamma (forzamiento): <input id="odeGamma" type="number" step="0.001" value="0.01" style="width:100px"/></label>
+																			<label>t max: <input id="odeTmax" type="number" step="1" value="100" style="width:100px"/></label>
+																			<label>dt: <input id="odeDt" type="number" step="0.1" value="1" style="width:100px"/></label>
+																			<label>Ver serie de barrio: <select id="barrioSelect"><option value="__total__">-- Total R_total --</option></select></label>
+																			<button id="simulateOdeBtn">Simular ODE</button>
+																			<canvas id="odeChart" style="width:100%;height:220px;margin-top:8px"></canvas>
+																		</div>
+							</div>
+				</section>
+
+				<section>
+					<h2>Notas</h2>
+					<p>Esta demo usa datos de ejemplo. El cálculo de beneficio por barrio usa la fórmula P = d·A·m·(Cc + L(x)).</p>
+				</section>
+
+
+			</aside>
+
+			<main id="mapContainer">
+				<div id="map"></div>
+			</main>
+		</div>
+
+		<!-- Leaflet JS (CDN) -->
+		<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+			<!-- Turf for area calculations -->
+			<script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+			<!-- Chart.js for plotting -->
+			<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+		<script src="src/app.js"></script>
+	</body>
+</html>
